@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Council Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="images/logos/knit-logo.jpg" alt="College Logo" class="h-12 w-12 rounded-full">
+                <span class="text-3xl font-bold text-gray-800">Council Portal</span>
+            </div>
+            <div>
+                <a href="index.html" class="text-blue-600 font-semibold hover:underline">&larr; Back to all councils</a>
+            </div>
+        </div>
+    </nav>
+    <main class="container mx-auto px-6 py-16">
+        
+        <div class="lg:grid lg:grid-cols-3 lg:gap-12">
+
+            <div class="lg:col-span-1 space-y-8">
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <img id="council-logo" src="https://via.placeholder.com/150" alt="Council Logo" class="h-40 w-40 rounded-full mx-auto mb-4 object-cover">
+                    <h1 id="council-name" class="text-3xl font-bold text-gray-800">Loading...</h1>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Follow Us</h3>
+                    <div class="space-y-3">
+                        <a id="council-insta" href="#" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600">
+                            <img src="images/logos/insta-logo.png" class="h-6 w-6"> <span id="council-insta-handle">@instagram_handle</span>
+                        </a>
+                        <a id="council-youtube" href="#" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600">
+                            <img src="images/logos/youtube-logo.png" class="h-6 w-6"> <span>YouTube Channel</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Post Holders</h3>
+                    <div id="council-members" class="space-y-4">
+                        <p>Loading members...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 mt-8 lg:mt-0">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">About Us</h2>
+                    <p id="council-description" class="text-gray-700 leading-relaxed">
+                        Loading description...
+                    </p>
+
+                    <hr class="my-8">
+
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Famous Events</h2>
+                    <div id="council-events" class="space-y-6">
+                        <p>Loading events...</p>
+                    </div>
+                    
+                    <hr class="my-8">
+                    
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Gallery</h2>
+                    <div id="council-gallery" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <p>Loading gallery...</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+        <div class="container mx-auto px-6 text-center">
+             © 2025 Kamla Nehru Institute of Technology. All rights reserved.
+        </div>
+    </footer>
+    <script src="data.js"></script>
+    <script src="council-detail.js"></script>
+</body>
+</html>

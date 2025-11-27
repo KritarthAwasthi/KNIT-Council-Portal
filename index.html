@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Council Portal - KNIT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <header class="bg-[#13426b] text-white py-6 mb-8">
+        <div class="container mx-auto px-6 flex items-center justify-center space-x-4">
+            <img src="images/logos/knit-logo.jpg" alt="College Logo" class="h-14 w-14 rounded-full">
+            <h3 class="text-2xl font-semibold text-center">Kamla Nehru Institute of Technology</h3>
+        </div>
+    </header>
+
+    <!-- Header / Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl font-bold text-gray-800">Council Portal</span>
+            </div>
+
+            <!-- Navbar -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="council.html?id=cultural" class="text-gray-600 hover:text-blue-600">Cultural</a>
+                <a href="council.html?id=literary" class="text-gray-600 hover:text-blue-600">Literary</a>
+                <a href="council.html?id=pfac" class="text-gray-600 hover:text-blue-600">PFAC</a>
+                <a href="council.html?id=sports" class="text-gray-600 hover:text-blue-600">Sports</a>
+                <a href="council.html?id=tech-robo" class="text-gray-600 hover:text-blue-600">Tech &amp; Robotics</a>
+            </div>
+
+            <div class="md:hidden">
+                <button class="text-gray-800 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Images section-->
+    <section class="container mx-auto px-6 py-12">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Glimpses of Campus Life</h2>
+
+        <!-- Using a 6-column grid with varied col-span and row-span to create unequal image sizes. 
+        Each image is wrapped in a parent with overflow-hidden so hover scale works and "pops" the image. -->
+        <div class="grid grid-cols-6 gap-4 auto-rows-fr">
+
+            <div class="col-span-3 row-span-2 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img1.jpg" alt="Event Photo 1" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-2 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img2.jpg" alt="Event Photo 2" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-1 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img3.jpg" alt="Event Photo 3" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-2 row-span-2 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img4.jpg" alt="Event Photo 4" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-1 row-span-2 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img5.jpg" alt="Event Photo 5" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-2 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img6.jpg" alt="Event Photo 6" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-1 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img7.jpg" alt="Event Photo 7" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-3 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img8.jpg" alt="Event Photo 8" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-2 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img9.jpg" alt="Event Photo 9" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-1 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img10.jpg" alt="Event Photo 10" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-2 row-span-2 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img11.jpg" alt="Event Photo 11" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-1 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img12.jpg" alt="Event Photo 12" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-1 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img13.jpg" alt="Event Photo 13" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-2 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img14.jpg" alt="Event Photo 14" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+            <div class="col-span-1 row-span-1 overflow-hidden rounded-lg shadow-lg">
+                <img src="images/events/img15.jpg" alt="Event Photo 15" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Main body: Meet the Councils -->
+    <main class="container mx-auto px-6 py-12">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Meet the Councils</h2>
+        
+        <div id="council-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Council cards will be populated here by data.js / script.js -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#13426b] text-gray-300 py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <img src="images/logos/knit-logo.jpg" alt="College Logo" class="h-12 w-12 rounded-full">
+                    <span class="text-xl font-semibold text-white">Kamla Nehru Institute of Technology</span>
+                </div>
+            </div>
+
+            <div>
+                <h5 class="text-lg font-semibold text-white mb-4">Contact Us</h5>
+                <ul class="space-y-2">
+                    <li>Email: <a href="mailto:info@college.ac.in" class="hover:text-white">info@college.ac.in</a></li>
+                    <li>Phone: 05362 240 454</li>
+                    <li>Address: Sultanpur - Kadipur Road, Sultanpur, Uttar Pradesh 228118</li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="text-lg font-semibold text-white mb-4">Useful Links</h5>
+                <ul class="space-y-2">
+                    <li><a href="https://knit.ac.in" class="hover:text-white">KNIT</a></li>
+                    <li><a href="#" class="hover:text-white">Admissions</a></li>
+                    <li><a href="#" class="hover:text-white">Student Notices</a></li>
+                    <li><a href="#" class="hover:text-white">Campus Map</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="text-center text-gray-500 text-sm mt-8 border-t border-gray-700 pt-8">
+            © 2025 KNIT . All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
