@@ -1,160 +1,97 @@
 // data.js
-// This file holds all the information for our councils.
 
+// --- PART 1: COUNCIL PROFILES (Static Data) ---
 const councilsData = [
     {
         id: "cultural",
         name: "Cultural Council",
-        logo: "images/cult/cult-logo.jpg",
-        description: "The Cultural Council organizes all major cultural festivals, workshops, and events, bringing the campus to life with music, dance, and art.",
-        instagram: "https://www.instagram.com/culturalcouncilknit/",
-        youtube: "",
-        
-        members: [
-            { name: " ", post: "" },
-            { name: "", post: "" },
-        ],
-        
+        logo: "images/cult/cult-logo.jpg", // Make sure this image exists!
+        description: "The Cultural Council organizes all major cultural festivals, workshops, and events.",
+        // We keep famousEvents here just for the 'About Us' text on the profile page
         famousEvents: [
-            { 
-                name: "", 
-                description: "" 
-            },
-            { 
-                name: "", 
-                description: "" 
-            }
+            { name: "Anokhi", description: "The annual cultural fest." }
         ],
-        
-        galleryImages: [
-            "images//gallery-1.jpg",
-            "images//gallery-2.jpg",
-            "images//gallery-3.jpg",
-            "images//gallery-4.jpg"
-        ]
-    },
-    {
-        id: "literary",
-        name: "Literary Council",
-        logo: "images/lit/lit-logo.jpg",
-        description: "Home to the wordsmiths, debaters, and quizzes. The Literary Council fosters a love for language and critical thinking through various events.",
-
-        instagram: "https://www.instagram.com/litcknit/",
-        
+        instagram: "https://instagram.com/knit_cultural",
+        youtube: "https://youtube.com/knitcultural",
         members: [
-            { name: " ", post: "" },
-            { name: "", post: "" },
+            { name: "Aarav Singh", post: "President" }
         ],
-        
-        famousEvents: [
-            { 
-                name: "", 
-                description: "" 
-            },
-            { 
-                name: "", 
-                description: "" 
-            }
-        ],
-        
-        galleryImages: [
-            "images//gallery-1.jpg",
-            "images//gallery-2.jpg",
-            "images//gallery-3.jpg",
-            "images//gallery-4.jpg"
-        ]
+        galleryImages: ["images/cult/gallery-1.jpg"] // Ensure these exist
     },
     {
         id: "sports",
         name: "Sports Council",
         logo: "images/sports/sports-logo.jpg",
-        description: "Managing all sporting activities, from inter-branch tournaments to our annual sports fest, we keep the campus active and competitive.",
-
-        instagram: "https://www.instagram.com/sportscouncilknit/",
-        
-        members: [
-            { name: " ", post: "" },
-            { name: "", post: "" },
-        ],
-        
+        description: "Managing all sporting activities and keeping the campus active.",
         famousEvents: [
-            { 
-                name: "", 
-                description: "" 
-            },
-            { 
-                name: "", 
-                description: "" 
-            }
+             { name: "Aagaz", description: "Annual sports meet." }
         ],
-        
-        galleryImages: [
-            "images//gallery-1.jpg",
-            "images//gallery-2.jpg",
-            "images//gallery-3.jpg",
-            "images//gallery-4.jpg"
-        ]
-    },
-    {
-        id: "pfac",
-        name: "Photography & Fine Arts (PFAC)",
-        logo: "images/pfac/pfac-logo.jpg",
-        description: "Capturing the beauty of campus life and promoting creativity. PFAC is the hub for artists, photographers, and designers.",
-
-        instagram: "https://www.instagram.com/photography_and_fine_arts_club/",
-        
+        instagram: "https://instagram.com/knit_sports",
+        youtube: null,
         members: [
-            { name: " ", post: "" },
-            { name: "", post: "" },
+            { name: "Aman Gupta", post: "Captain" }
         ],
-        
-        famousEvents: [
-            { 
-                name: "", 
-                description: "" 
-            },
-            { 
-                name: "", 
-                description: "" 
-            }
-        ],
-        
-        galleryImages: [
-            "images//gallery-1.jpg",
-            "images//gallery-2.jpg",
-            "images//gallery-3.jpg",
-            "images//gallery-4.jpg"
-        ]
+        galleryImages: []
     },
     {
         id: "tech-robo",
-        name: "Tech & Robotics Club",
+        name: "Tech & Robo Council",
         logo: "images/tech/tech-logo.jpg",
-        description: "The heart of innovation on campus. We build robots, host hackathons, and explore the latest in technology and coding.",
+        description: "Innovation, robotics, and coding challenges.",
+        famousEvents: [],
+        instagram: "",
+        youtube: null,
+        members: [],
+        galleryImages: []
+    }
+    // ... You can add your other councils (PFAC, IEI, etc.) here
+];
 
-        instagram: "https://www.instagram.com/tech_club.knit/",
-        
-        members: [
-            { name: " ", post: "" },
-            { name: "", post: "" },
-        ],
-        
-        famousEvents: [
-            { 
-                name: "", 
-                description: "" 
-            },
-            { 
-                name: "", 
-                description: "" 
-            }
-        ],
-        
-        galleryImages: [
-            "images//gallery-1.jpg",
-            "images//gallery-2.jpg",
-            "images//gallery-3.jpg",
-            "images//gallery-4.jpg"
-        ]
+
+// --- PART 2: THE MASTER EVENTS LIST (Calendar Data) ---
+// Date Format must be: "YYYY-MM-DD"
+const calendarEvents = [
+    // NOV 2025 EVENTS (Simulated Current Month)
+    {
+        title: "Freshers' Auditions",
+        date: "2025-11-05",
+        councilId: "cultural", // Links to Cultural Council
+        type: "Freshers Only",
+        description: "Auditions for first-year students in dance and music."
+    },
+    {
+        title: "Cricket Selection",
+        date: "2025-11-08",
+        councilId: "sports", // Links to Sports Council
+        type: "Open for All",
+        description: "Selection trials for the college cricket team."
+    },
+    {
+        title: "Robotics Workshop",
+        date: "2025-11-12",
+        councilId: "tech-robo", // Links to Tech Council
+        type: "Workshop",
+        description: "Introduction to Arduino and sensors."
+    },
+    {
+        title: "Anokhi Day 1",
+        date: "2025-11-20",
+        councilId: "cultural",
+        type: "Major Event",
+        description: "Grand inauguration of the cultural fest."
+    },
+    {
+        title: "Anokhi Day 2",
+        date: "2025-11-21",
+        councilId: "cultural",
+        type: "Major Event",
+        description: "Battle of bands and fashion show."
+    },
+    {
+        title: "Yoga Morning",
+        date: "2025-11-25",
+        councilId: "sports",
+        type: "Wellness",
+        description: "Morning yoga session at the main ground."
     }
 ];
