@@ -5,56 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Calendar</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom "Beige" color for Literary Council since Tailwind doesn't have it by default */
+        .bg-beige { background-color: #F5F5DC; color: #5c5c3d; }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans h-screen flex flex-col">
 
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <nav class="bg-white shadow-md z-50 flex-none">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <img src="images/logos/knit-logo.jpg" alt="College Logo" class="h-12 w-12 rounded-full">
-                <span class="text-xl font-bold text-gray-800">Campus Events</span>
+                <img src="images/logos/knit-logo.jpg" alt="Logo" class="h-10 w-10 rounded-full">
+                <span class="text-lg font-bold text-gray-800">Events Calendar</span>
             </div>
-            <a href="index.html" class="text-blue-600 font-semibold hover:underline">&larr; Back to Home</a>
+            <a href="index.html" class="text-blue-600 font-semibold hover:underline text-sm">&larr; Back Home</a>
         </div>
     </nav>
 
-    <main class="container mx-auto px-6 py-8">
-        <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-md">
-            <button id="prev-month" class="text-gray-600 hover:text-blue-600 font-bold px-4 py-2 border rounded hover:bg-gray-50">&lt; Prev</button>
-            <h2 id="current-month-year" class="text-2xl font-bold text-gray-800">Loading...</h2>
-            <button id="next-month" class="text-gray-600 hover:text-blue-600 font-bold px-4 py-2 border rounded hover:bg-gray-50">Next &gt;</button>
-        </div>
+    <div class="flex flex-col md:flex-row flex-grow overflow-hidden">
 
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div class="grid grid-cols-7 bg-gray-50 border-b">
-                <div class="py-2 text-center font-bold text-gray-600">Sun</div>
-                <div class="py-2 text-center font-bold text-gray-600">Mon</div>
-                <div class="py-2 text-center font-bold text-gray-600">Tue</div>
-                <div class="py-2 text-center font-bold text-gray-600">Wed</div>
-                <div class="py-2 text-center font-bold text-gray-600">Thu</div>
-                <div class="py-2 text-center font-bold text-gray-600">Fri</div>
-                <div class="py-2 text-center font-bold text-gray-600">Sat</div>
-            </div>
-            <div id="calendar-grid" class="grid grid-cols-7 auto-rows-fr"></div>
-        </div>
-    </main>
-
-    <div id="event-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50 px-4">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-lg overflow-hidden relative">
-            <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
-            <div class="p-6">
-                <div class="flex items-center space-x-3 mb-4">
-                    <img id="modal-council-logo" src="" class="h-10 w-10 rounded-full border">
-                    <div>
-                        <h2 id="modal-event-title" class="text-xl font-bold text-gray-800 leading-tight">Title</h2>
-                        <span id="modal-council-name" class="text-sm text-blue-600 font-semibold">Council</span>
-                    </div>
+        <aside class="w-full md:w-[30%] bg-white border-r border-gray-200 overflow-y-auto p-6 flex flex-col relative z-20 shadow-lg">
+            
+            <div id="state-empty" class="flex flex-col items-center justify-center h-full text-center opacity-100 transition-opacity duration-300">
+                <div class="bg-blue-50 p-6 rounded-full mb-4">
+                    <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 </div>
-                <span id="modal-event-type" class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded mb-3 inline-block">Type</span>
-                <p id="modal-event-date" class="text-gray-500 text-sm mb-4 border-b pb-2">Date</p>
-                <p id="modal-event-desc" class="text-gray-700">Description...</p>
+                <h3 class="text-xl font-bold text-gray-700">Select a Date</h3>
+                <p class="text-gray-500 mt-2 text-sm">Click on any date in the calendar to see details.</p>
             </div>
-        </div>
+
+            <div id="state-content" class="hidden h-full flex flex-col">
+                <div class="border-b pb-4 mb-4">
+                    <p id="detail-date" class="text-sm font-bold text-gray-500 uppercase tracking-wide">NO DATE SELECTED</p>
+                </div>
+
+                <div id="event-details-container" class="space-y-6">
+                    </div>
+            </div>
+        </aside>
+
+
+        <main class="w-full md:w-[70%] bg-gray-50 p-4 md:p-8 flex flex-col h-full overflow-hidden">
+            
+            <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-xl shadow-sm flex-none">
+                <button id="prev-month" class="p-2 hover:bg-gray-100 rounded-full text-gray-600 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <h2 id="current-month-year" class="text-2xl font-bold text-gray-800">Loading...</h2>
+                <button id="next-month" class="p-2 hover:bg-gray-100 rounded-full text-gray-600 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+
+            <div class="flex-grow bg-white rounded-xl shadow-sm overflow-hidden flex flex-col">
+                <div class="grid grid-cols-7 border-b bg-gray-50 flex-none">
+                    <div class="py-3 text-center text-sm font-bold text-gray-500">Sun</div>
+                    <div class="py-3 text-center text-sm font-bold text-gray-500">Mon</div>
+                    <div class="py-3 text-center text-sm font-bold text-gray-500">Tue</div>
+                    <div class="py-3 text-center text-sm font-bold text-gray-500">Wed</div>
+                    <div class="py-3 text-center text-sm font-bold text-gray-500">Thu</div>
+                    <div class="py-3 text-center text-sm font-bold text-gray-500">Fri</div>
+                    <div class="py-3 text-center text-sm font-bold text-gray-500">Sat</div>
+                </div>
+                
+                <div id="calendar-grid" class="grid grid-cols-7 grid-rows-6 h-full">
+                    </div>
+            </div>
+
+        </main>
     </div>
 
     <script src="data.js"></script>

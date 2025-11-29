@@ -7,6 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="data.js"></script>
     <script src="script.js"></script>
+
+    <style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
 </head>
 <body class="bg-gray-100 font-sans">
 
@@ -27,11 +34,11 @@
 
             <!-- Navbar -->
             <div class="hidden md:flex items-center space-x-6">
-                <a href="council.html?id=cultural" class="text-gray-600 hover:text-blue-600">Cultural</a>
-                <a href="council.html?id=literary" class="text-gray-600 hover:text-blue-600">Literary</a>
-                <a href="council.html?id=pfac" class="text-gray-600 hover:text-blue-600">PFAC</a>
-                <a href="council.html?id=sports" class="text-gray-600 hover:text-blue-600">Sports</a>
-                <a href="council.html?id=tech-robo" class="text-gray-600 hover:text-blue-600">Tech &amp; Robotics</a>
+                <a href="council.html?id=cultural" class="text-lg text-gray-800 hover:text-blue-600">Cultural</a>
+                <a href="council.html?id=literary" class="text-lg text-gray-800 hover:text-blue-600">Literary</a>
+                <a href="council.html?id=pfac" class="text-lg text-gray-800 hover:text-blue-600">PFAC</a>
+                <a href="council.html?id=sports" class="text-lg text-gray-800 hover:text-blue-600">Sports</a>
+                <a href="council.html?id=tech-robo" class="text-lg text-gray-800 hover:text-blue-600">Tech &amp; Robotics</a>
             </div>
 
             
@@ -45,9 +52,9 @@
             </div>
         </div>
     </nav>
-
+    <!-- Events Calendar Banner -->
     <div class="bg-[#13426b] text-white text-center py-2 px-4 shadow-md">
-    <p class="text-lg font-medium">
+    <p class="text-xl font-medium">
         📅 Want to know what's happening on campus? 
         <a href="calendar.html" class="underline hover:text-blue-200 ml-1 font-bold">View Master Calendar &rarr;</a>
     </p>
@@ -56,9 +63,71 @@
     <!-- Images section-->
     <section class="container mx-auto px-6 py-12">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Glimpses of Campus Life</h2>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 h-screen md:h-[600px]">
+            
+            <div class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg">
+                <img src="images/events/img1.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition duration-300"></div>
+            </div>
 
-        <!-- Using a 6-column grid with varied col-span and row-span to create unequal image sizes. 
-        Each image is wrapped in a parent with overflow-hidden so hover scale works and "pops" the image. -->
+            <div class="row-span-2 relative group overflow-hidden rounded-lg">
+                <img src="images/events/img2.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="relative group overflow-hidden rounded-lg">
+                <img src="images/events/img3.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="relative group overflow-hidden rounded-lg">
+                <img src="images/events/img4.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="col-span-2 relative group overflow-hidden rounded-lg">
+                <img src="images/events/img5.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="relative group overflow-hidden rounded-lg">
+                <img src="images/events/img6.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="relative group overflow-hidden rounded-lg">
+                <img src="images/events/img7.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="row-span-2 relative group overflow-hidden rounded-lg">
+                <img src="images/events/img8.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="relative group overflow-hidden rounded-lg">
+                <img src="images/events/img9.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="relative group overflow-hidden rounded-lg">
+                <img src="images/events/img10.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg">
+                <img src="images/events/img11.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="relative group overflow-hidden rounded-lg">
+                <img src="images/events/img12.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="relative group overflow-hidden rounded-lg">
+                <img src="images/events/img13.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+
+            <div class="col-span-2 relative group overflow-hidden rounded-lg">
+                <img src="images/events/img14.jpg" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+            </div>
+            
+            </div>
+    </section>
+
+        <!--Using a 6-column grid with varied col-span and row-span to create unequal image sizes. 
+        Each image is wrapped in a parent with overflow-hidden so hover scale works and "pops" the image.
         <div class="grid grid-cols-6 gap-4 auto-rows-fr">
 
             <div class="col-span-3 row-span-2 overflow-hidden rounded-lg shadow-lg">
@@ -119,13 +188,13 @@
 
             <div class="col-span-1 row-span-1 overflow-hidden rounded-lg shadow-lg">
                 <img src="images/events/img15.jpg" alt="Event Photo 15" class="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105 hover:z-10">
-            </div>
+            </div>-->
 
         </div>
     </section>
 
     <!-- Main body: Meet the Councils -->
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-6 py-12" id="councils">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Meet the Councils</h2>
         
         <div id="council-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -167,8 +236,9 @@
 
         </div>
 
-        <a href="calendar.html" class="fixed bottom-8 right-8 bg-[#13426b] text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition transform hover:scale-110 z-50 flex items-center justify-center group">
-    <span class="text-2xl">📅</span>
+        <!--Floating Events Calendar Button -->
+        <!-- <a href="calendar.html" class="fixed bottom-8 right-8 bg-[#13426b] text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition transform hover:scale-110 z-50 flex items-center justify-center group">
+    <span class="text-2xl">📅</span> -->
     
     <span class="absolute right-full mr-4 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
         View Events

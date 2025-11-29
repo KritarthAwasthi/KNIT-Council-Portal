@@ -1,55 +1,63 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // Elements
+    // --- DOM ELEMENTS ---
     const grid = document.getElementById("calendar-grid");
     const monthDisplay = document.getElementById("current-month-year");
     const prevBtn = document.getElementById("prev-month");
     const nextBtn = document.getElementById("next-month");
-    const modal = document.getElementById("event-modal");
-    const closeModalBtn = document.getElementById("close-modal");
 
-    // Colors for different councils
-    const councilColors = {
-        "cultural": "bg-red-500",
-        "sports": "bg-green-500",
-        "tech-robo": "bg-blue-600",
-        "literary": "bg-yellow-500",
-        "pfac": "bg-purple-500",
-        "iei": "bg-orange-500",
-        "iisf": "bg-indigo-500"
+    // Sidebar Elements
+    const stateEmpty = document.getElementById("state-empty");
+    const stateContent = document.getElementById("state-content");
+    const detailDate = document.getElementById("detail-date");
+    const detailContainer = document.getElementById("event-details-container");
+
+    // --- CONFIGURATION ---
+    const councilStyles = {
+        "cultural": { bg: "bg-purple-500", text: "text-white", border: "border-purple-500", light: "bg-purple-50" },
+        "literary": { bg: "bg-orange-100", text: "text-orange-900", border: "border-orange-300", light: "bg-orange-50" }, 
+        "sports":   { bg: "bg-sky-400",    text: "text-white", border: "border-sky-400", light: "bg-sky-50" },
+        "tech-robo":{ bg: "bg-gray-800",   text: "text-white", border: "border-gray-800", light: "bg-gray-100" },
+        "pfac":     { bg: "bg-pink-500",   text: "text-white", border: "border-pink-500", light: "bg-pink-50" },
+        "iei":      { bg: "bg-blue-600",   text: "text-white", border: "border-blue-600", light: "bg-blue-50" },
+        "iisf":     { bg: "bg-indigo-600", text: "text-white", border: "border-indigo-600", light: "bg-indigo-50" }
     };
 
     // State
-    let currentDate = new Date(); // Starts at today (Nov 2025)
+    let currentDate = new Date();
     let currentMonth = currentDate.getMonth();
     let currentYear = currentDate.getFullYear();
+    let selectedDate = null;
 
-    // 1. MERGE DATA: Combine Events with Council Info
+    // --- DATA MERGING ---
     const fullEventsList = calendarEvents.map(event => {
         const councilInfo = councilsData.find(c => c.id === event.councilId);
         return {
             ...event,
-            councilName: councilInfo ? councilInfo.name : "Unknown",
-            councilLogo: councilInfo ? councilInfo.logo : "images/logos/knit-logo.jpg"
+            councilName: councilInfo ? councilInfo.name : "Unknown Council",
+            councilLogo: councilInfo ? councilInfo.logo : "images/logos/knit-logo.jpg",
+            // Defaults if missing in data.js
+            time: event.time || "TBA",
+            venue: event.venue || "TBA",
+            contactName: event.contactName || "Council Head",
+            contactNumber: event.contactNumber || "Not Available"
         };
     });
 
-    // 2. RENDER FUNCTION
+    // --- RENDER CALENDAR ---
     function renderCalendar(month, year) {
         grid.innerHTML = "";
         
-        // Update Title
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         monthDisplay.innerText = `${monthNames[month]} ${year}`;
 
-        // Calculations
         const firstDay = new Date(year, month, 1).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-        // Empty slots for start of month
+        // Empty Slots
         for (let i = 0; i < firstDay; i++) {
             const empty = document.createElement("div");
-            empty.className = "h-32 bg-gray-50 border border-gray-100";
+            empty.className = "border-b border-r border-gray-100 bg-gray-50";
             grid.appendChild(empty);
         }
 
@@ -57,72 +65,142 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let day = 1; day <= daysInMonth; day++) {
             const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             const todaysEvents = fullEventsList.filter(e => e.date === dateString);
-
-            // Cell Wrapper
+            
             const cell = document.createElement("div");
-            cell.className = "h-32 border border-gray-200 bg-white p-2 relative group hover:bg-blue-50 transition";
-            cell.innerHTML = `<span class="text-gray-700 font-bold block mb-1">${day}</span>`;
-
-            // Dots Container
+            let cellClasses = "border-b border-r border-gray-100 relative cursor-pointer transition-all hover:brightness-95 group h-full min-h-[100px]"; // Added min-h
+            
+            let contentHTML = `<span class="absolute top-2 left-2 font-bold text-sm z-10">${day}</span>`;
+            
             if (todaysEvents.length > 0) {
-                const dotsContainer = document.createElement("div");
-                dotsContainer.className = "flex flex-wrap gap-1";
-
-                todaysEvents.forEach(event => {
-                    const colorClass = councilColors[event.councilId] || "bg-gray-500";
-                    
-                    // Dot Wrapper (Relative for Tooltip)
-                    const wrapper = document.createElement("div");
-                    wrapper.className = "relative group/dot"; // sub-group for tooltip
-
-                    // The Dot
-                    const dot = document.createElement("div");
-                    dot.className = `w-3 h-3 rounded-full ${colorClass} cursor-pointer hover:scale-125 transition-transform`;
-
-                    // The Tooltip (Visible on Hover)
-                    const tooltip = document.createElement("div");
-                    tooltip.className = "hidden group-hover/dot:block absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 bg-gray-900 text-white text-xs rounded shadow-xl p-2 pointer-events-none";
-                    tooltip.innerHTML = `
-                        <p class="font-bold text-blue-200 mb-0.5">${event.councilName}</p>
-                        <p class="font-semibold text-white">${event.title}</p>
-                        <span class="block mt-1 text-[10px] bg-gray-700 px-1 rounded inline-block">${event.type}</span>
-                    `;
-
-                    wrapper.appendChild(dot);
-                    wrapper.appendChild(tooltip);
-                    
-                    // Click to Open Modal
-                    dot.addEventListener("click", (e) => {
-                        e.stopPropagation();
-                        openModal(event);
-                    });
-
-                    dotsContainer.appendChild(wrapper);
-                });
-                cell.appendChild(dotsContainer);
+                const mainEvent = todaysEvents[0];
+                const style = councilStyles[mainEvent.councilId] || { bg: "bg-gray-400", text: "text-white" };
+                
+                cellClasses += ` ${style.bg} ${style.text}`;
+                contentHTML += `
+                    <div class="h-full w-full flex flex-col justify-center items-center text-center p-2 pt-6">
+                        <span class="text-sm font-bold leading-tight line-clamp-2">
+                            ${mainEvent.title}
+                        </span>
+                        ${todaysEvents.length > 1 ? `<span class="text-xs opacity-90 mt-1 bg-black bg-opacity-20 px-2 rounded-full">+${todaysEvents.length - 1} more</span>` : ''}
+                    </div>
+                `;
+            } else {
+                cellClasses += " bg-white text-gray-700 hover:bg-gray-50";
             }
+
+            if (selectedDate === dateString) {
+                cellClasses += " ring-4 ring-inset ring-blue-500 z-20";
+            }
+
+            cell.className = cellClasses;
+            cell.innerHTML = contentHTML;
+
+            cell.addEventListener("click", () => {
+                selectedDate = dateString;
+                renderCalendar(currentMonth, currentYear);
+                updateSidebar(dateString, todaysEvents);
+            });
+
             grid.appendChild(cell);
         }
     }
 
-    // Modal Logic
-    function openModal(event) {
-        document.getElementById("modal-event-title").innerText = event.title;
-        document.getElementById("modal-event-desc").innerText = event.description;
-        document.getElementById("modal-event-type").innerText = event.type;
-        document.getElementById("modal-council-name").innerText = event.councilName;
-        document.getElementById("modal-council-logo").src = event.councilLogo;
-        
-        const d = new Date(event.date);
-        document.getElementById("modal-event-date").innerText = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-        
-        modal.classList.remove("hidden");
+    // --- THE NEW DETAILED SIDEBAR ---
+    function updateSidebar(dateStr, events) {
+        stateEmpty.classList.add("hidden");
+        stateContent.classList.remove("hidden");
+
+        const dateObj = new Date(dateStr);
+        const niceDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        detailDate.innerText = niceDate;
+
+        detailContainer.innerHTML = "";
+
+        if (events.length === 0) {
+            detailContainer.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-64 text-gray-400">
+                    <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <p class="text-lg font-medium">No events scheduled</p>
+                    <p class="text-sm">Enjoy your day off!</p>
+                </div>
+            `;
+            return;
+        }
+
+        events.forEach(event => {
+            const style = councilStyles[event.councilId] || { text: "text-gray-600", border: "border-gray-300", light: "bg-gray-50" };
+            
+            const card = document.createElement("div");
+            card.className = "bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden mb-6";
+
+            card.innerHTML = `
+                <div class="h-3 w-full ${style.bg}"></div>
+
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <img src="${event.councilLogo}" class="h-10 w-10 rounded-full border border-gray-100 object-cover">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-gray-500">${event.councilName}</p>
+                                <span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1">${event.type}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-gray-800 leading-tight mb-4">${event.title}</h2>
+
+                    <div class="grid grid-cols-2 gap-3 mb-6">
+                        <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                            <p class="text-xs text-gray-400 uppercase font-bold mb-1">Time</p>
+                            <div class="flex items-center text-gray-700 font-semibold text-sm">
+                                <svg class="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                ${event.time}
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+                            <p class="text-xs text-gray-400 uppercase font-bold mb-1">Venue</p>
+                            <div class="flex items-center text-gray-700 font-semibold text-sm">
+                                <svg class="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                ${event.venue}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <p class="text-xs text-gray-400 uppercase font-bold mb-2">Description</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">${event.description}</p>
+                    </div>
+
+                    <div class="mb-6 bg-blue-50 p-4 rounded-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-blue-500 uppercase font-bold mb-1">Coordinator</p>
+                            <p class="text-sm font-bold text-gray-800">${event.contactName}</p>
+                        </div>
+                        <div class="text-right">
+                             <p class="text-xs text-blue-500 uppercase font-bold mb-1">Contact</p>
+                             <a href="tel:${event.contactNumber}" class="text-sm font-bold text-gray-800 hover:text-blue-600 flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                ${event.contactNumber}
+                             </a>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="${event.regLink || '#'}" class="flex items-center justify-center bg-gray-900 hover:bg-black text-white text-sm font-bold py-3 rounded-lg transition-colors">
+                            Register Now
+                        </a>
+                        <a href="#" class="flex items-center justify-center border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-bold py-3 rounded-lg transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Resources
+                        </a>
+                    </div>
+
+                </div>
+            `;
+            detailContainer.appendChild(card);
+        });
     }
 
-    closeModalBtn.addEventListener("click", () => modal.classList.add("hidden"));
-    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.add("hidden"); });
-
-    // Buttons
     prevBtn.addEventListener("click", () => {
         currentMonth--;
         if (currentMonth < 0) { currentMonth = 11; currentYear--; }
@@ -134,6 +212,5 @@ document.addEventListener("DOMContentLoaded", function() {
         renderCalendar(currentMonth, currentYear);
     });
 
-    // Start
     renderCalendar(currentMonth, currentYear);
 });
