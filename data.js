@@ -5,11 +5,10 @@ const councilsData = [
     {
         id: "cultural",
         name: "Cultural Council",
-        logo: "images/cult/cult-logo.jpg", // Make sure this image exists!
-        description: "The Cultural Council organizes all major cultural festivals, workshops, and events.",
-        // We keep famousEvents here just for the 'About Us' text on the profile page
+        logo: "images/cult/cult-logo.jpg",
+        description: "The Cultural Council organizes all major cultural festivals, workshops, and events, bringing the campus to life with music, dance, and art.",
         famousEvents: [
-            { name: "Anubhuti", description: "The annual cultural fest." }
+            { name: "KNIT's Got Talent", description: "The freshers' talent hunt event." }
         ],
         instagram: "https://instagram.com/knit_cultural",
         youtube: "https://youtube.com/knitcultural",
@@ -18,22 +17,59 @@ const councilsData = [
             { name: "Riya Sonkar", post: "Secretary" },
             { name: "Aditya Mishra", post: "Joint Secretary" },
             { name: "Vidisha Chaudhary", post: "Joint Secretary" }
-            
         ],
-        galleryImages: ["images/cult/gallery-1.jpg"] // Ensure these exist
+        galleryImages: ["images/cult/gallery-1.jpg"]
+    },
+    {
+        id: "literary",
+        name: "Literary Council",
+        logo: "images/lit/lit-logo.jpg",
+        description: "Home to the wordsmiths, debaters, and quizzes. The Literary Council fosters a love for language and critical thinking through various events.",
+        famousEvents: [
+            { name: "Vagmita", description: "The annual debate and elocution competition." }
+        ],
+        instagram: "https://instagram.com/knit_literary",
+        youtube: null,
+        members: [
+            { name: "Vaibhav Pandey", post: "Secretary" },
+            { name: "Anushka Shekhar", post: "Secretary" },
+            { name: "Venketesh Shukla", post: "Joint Secretary" },
+            { name: "Yashi Yadav", post: "Joint Secretary" },
+            { name: "Amritansh Pandey", post: "Joint Secretary" }
+        ],
+        galleryImages: ["images/lit/gallery-1.jpg"]
+    },
+    {
+        id: "pfac",
+        name: "Photography & Fine Arts Club (PFAC)",
+        logo: "images/pfac/pfac-logo.jpg",
+        description: "Capturing the beauty of campus life and promoting creativity. PFAC is the hub for artists, photographers, and designers.",
+        famousEvents: [
+            { name: "Cosmos", description: "Art exhibition and photography contest." }
+        ],
+        instagram: "https://instagram.com/knit_pfac",
+        youtube: null,
+        members: [
+            { name: "Aman Kumar", post: "Secretary" },
+            { name: "Dia Chaudhary", post: "Secretary" },
+            { name: "Pushpendra Singh", post: "Joint Secretary" },
+            { name: "Amna Zehra", post: "Joint Secretary" }
+        ],
+        galleryImages: ["images/pfac/gallery-1.jpg"]
     },
     {
         id: "sports",
         name: "Sports Council",
         logo: "images/sports/sports-logo.jpg",
-        description: "Managing all sporting activities and keeping the campus active.",
+        description: "Managing all sporting activities, from inter-branch tournaments to our annual sports fest, keeping the campus active and competitive.",
         famousEvents: [
-            {   name: "Aagaz", description: "Annual sports meet." }
+            { name: "Tvaran", description: "Annual sports meet." }
         ],
         instagram: "https://instagram.com/knit_sports",
         youtube: null,
         members: [
-            { name: "Aman Gupta", post: "Captain" }
+            { name: "Deepanshu Pandey", post: "Secretary" },
+            { name: "Manasvi Swaroop", post: "Secretary" },
         ],
         galleryImages: []
     },
@@ -41,14 +77,15 @@ const councilsData = [
         id: "tech-robo",
         name: "Tech & Robo Council",
         logo: "images/tech/tech-logo.jpg",
-        description: "Innovation, robotics, and coding challenges.",
-        famousEvents: [],
-        instagram: "",
+        description: "The heart of innovation on campus. We build robots, host hackathons, and explore the latest in technology and coding.",
+        famousEvents: [
+            { name: "Tav", description: "Technical festival." }
+        ],
+        instagram: "https://instagram.com/knit_techrobo",
         youtube: null,
         members: [],
         galleryImages: []
     }
-    // ... You can add your other councils (PFAC, IEI, etc.) here
 ];
 
 
